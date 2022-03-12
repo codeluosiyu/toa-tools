@@ -1,0 +1,40 @@
+{
+  "name": "toa-tools",
+  "version": "0.0.1",
+  "description": "javascript tools",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeluosiyu/toa-tools/issues"
+  },
+  "homepage": "https://github.com/codeluosiyu/toa-tools#readme",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "build:dev": "npm run clean && env_type=development npm run build",
+    "build:prod": "npm run clean && env_type=production npm run build",
+    "clean": "rimraf umd",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeluosiyu/toa-tools.git"
+  },
+  "keywords": [
+    "toolkit",
+    "rollup",
+    "typescript"
+  ],
+  "browser": "dist/index.ts",
+  "devDependencies": {
+    "rollup": "^2.70.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "rollup-plugin-postcss": "^4.0.2"
+  }
+}
