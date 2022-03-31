@@ -122,33 +122,6 @@ export const isInQQ = (() => {
 })();
 
 /**
- * 判断是否在商旅App中
- * @type {Boolean}
- */
-export const isInCtApp = (() => {
-  const ua = navigator.userAgent;
-  const ret = !!ua.match(/CoreInside/i);
-  return () => ret;
-})();
-
-/**
- * 判断是否是商旅活动
- */
-export const isInCtWeb = (() => {
-  const ret = /^ct\.ctrip\./.test(location.host);
-  return () => ret;
-})();
-
-/**
- * 判断是否在智行App中
- */
-export const isInZhixingApp = (() => {
-  const ua = navigator.userAgent;
-  const ret = !!ua.match(/zhixing|tieyou/i);
-  return () => ret;
-})();
-
-/**
  * 判断是否需要适配iphoneX
  */
 export const isIPhoneXSeries = (() => {

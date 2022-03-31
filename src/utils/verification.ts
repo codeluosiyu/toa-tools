@@ -53,26 +53,36 @@ export const hasEmoji = function (value: string, tips = "") {
 
 /**
  * 获取数组索引值
- * @param param0 
- * @returns 
+ * @param param0
+ * @returns
  */
 export const getIndexArr = function ({
-    id = "",
-    productTree = [],
-    idKey = 'id',
-    childrenKey = 'child'
-  }: { id: string, productTree?: Array<any>, idKey?: string, childrenKey?: string }) {
-    let indexArr: number[] = []
-    let fn: (arr: Array<any>) => boolean = (arr) => arr.some((elem: any, index) => {
+  id = "",
+  productTree = [],
+  idKey = "id",
+  childrenKey = "child",
+}: {
+  id: string;
+  productTree?: Array<any>;
+  idKey?: string;
+  childrenKey?: string;
+}) {
+  let indexArr: number[] = [];
+  let fn: (arr: Array<any>) => boolean = (arr) =>
+    arr.some((elem: any, index) => {
       if (elem[idKey] == id) {
-        indexArr.push(index)
-        return true
-      } else if (elem[childrenKey] && elem[childrenKey] instanceof Array && elem[childrenKey].length) {
-        return fn(elem[childrenKey]) && indexArr.push(index)
+        indexArr.push(index);
+        return true;
+      } else if (
+        elem[childrenKey] &&
+        elem[childrenKey] instanceof Array &&
+        elem[childrenKey].length
+      ) {
+        return fn(elem[childrenKey]) && indexArr.push(index);
       }
-      return false
-    })
-    fn(productTree)
-    indexArr.reverse()
-    return indexArr
-  }
+      return false;
+    });
+  fn(productTree);
+  indexArr.reverse();
+  return indexArr;
+};

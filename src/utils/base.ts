@@ -1,5 +1,4 @@
 // --- 数组操作 ---
-// 数组合并
 export const arrayConcat = function () {
   var tmpArr = [];
   for (let i = 0; i < arguments.length; i++) {
@@ -61,9 +60,9 @@ export const arrayEach = function (arr, fun) {
 
 /**
  * 2数之间的随机数
- * @param min 
- * @param max 
- * @returns 
+ * @param min
+ * @param max
+ * @returns
  */
 export const random = function (min: number, max: number): number {
   switch (arguments.length) {
