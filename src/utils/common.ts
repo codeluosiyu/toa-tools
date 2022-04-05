@@ -1,3 +1,4 @@
+/** 拼接秒数 */
 export const formatNumber = (n) => {
   const s = n.toString();
   return s[1] ? s : "0" + s;
