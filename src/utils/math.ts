@@ -44,3 +44,23 @@ export const getArrayItems = function (arr: Array<any>, num: number) {
   }
   return return_array;
 };
+
+/**
+ * 返回数组种重复数据的列表
+ * @param nums
+ * @returns
+ */
+export const findDuplicates = function (nums: Array<any>) {
+  const res = [];
+
+  for (const num of nums) {
+    const absNum = Math.abs(num);
+    if (nums[absNum - 1] < 0) {
+      res.push(absNum);
+    } else {
+      nums[absNum - 1] *= -1;
+    }
+  }
+
+  return res;
+};
