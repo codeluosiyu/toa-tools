@@ -83,3 +83,41 @@ export function parseQueryString(url) {
   }
   return obj;
 }
+
+/**
+ * 修改url中的参数
+ * @param { string } paramName
+ * @param { string } replaceWith
+ */
+export function replaceParamVal(paramName: string, replaceWith: any) {
+  var oUrl = location.href.toString();
+  var re = eval("/(" + paramName + "=)([^&]*)/gi");
+  location.href = oUrl.replace(re, paramName + "=" + replaceWith);
+  return location.href;
+}
+
+/**
+ * 删除url中指定的参数
+ * @param { string } name
+ */
+export function funcUrlDel(name: string) {
+  var loca = location;
+  var baseUrl = loca.origin + loca.pathname + "?";
+  var query = loca.search.substr(1);
+  if (query.indexOf(name) > -1) {
+    var obj = {};
+    var arr: Array<any> = query.split("&");
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].split("=");
+      obj[arr[i][0]] = arr[i][1];
+    }
+    delete obj[name];
+    var url =
+      baseUrl +
+      JSON.stringify(obj)
+        .replace(/[\"\{\}]/g, "")
+        .replace(/\:/g, "=")
+        .replace(/\,/g, "&");
+    return url;
+  }
+}
