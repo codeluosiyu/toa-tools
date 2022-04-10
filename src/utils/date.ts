@@ -176,3 +176,83 @@ export const fromTime = function (time: number) {
     return this.toDate(time, "str");
   }
 };
+
+/**
+ * 计算当前时间，传入类型
+ * @param type
+ * @param addTime
+ * @returns
+ */
+export const nowTimeStemp = (type: string, addTime: number) => {
+  var dateObj = new Date();
+  var cTime = dateObj.getTime();
+  try {
+    if (addTime) {
+      cTime += addTime;
+    }
+    if (!type) {
+      type = "number";
+    }
+    if (type == "number") {
+      return cTime;
+    } else if (type == "str") {
+      return timerToUTC(cTime / 1000, "str");
+    } else if (type == "array") {
+      return timerToUTC(cTime / 1000, "array");
+    }
+  } catch (error) {
+    return cTime;
+  }
+};
+
+/**
+ * 时间戳 转 UTC格式时间, 入参是时间戳、返回的类型
+ * @param timeStamp
+ * @param returnType
+ * @returns
+ */
+export const timerToUTC = (timeStamp, returnType) => {
+  timeStamp = parseInt(timeStamp);
+  var date = new Date();
+  if (timeStamp < 90000000000) {
+    date.setTime(timeStamp * 1000);
+  } else {
+    date.setTime(timeStamp);
+  }
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? "0" + m : m;
+  var d = date.getDate();
+  d = d < 10 ? "0" + d : d;
+  var h = date.getHours();
+  h = h < 10 ? "0" + h : h;
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+  minute = minute < 10 ? "0" + minute : minute;
+  second = second < 10 ? "0" + second : second;
+  if (returnType == "str") {
+    return y + "-" + m + "-" + d + " " + h + ":" + minute + ":" + second;
+  }
+  if (returnType == "assistEndTime") {
+    return y * 1 - 2000 + "/" + m + "/" + d;
+  }
+  return [y, m, d, h, minute, second];
+};
+
+/**
+ * 根据时间戳 检查 时间是否过期 true 表示没过期， false 表示过期
+ * @param time
+ * @returns
+ */
+export const checkTimeStamp = (time) => {
+  if (time < 90000000000) {
+    time *= 1000;
+  }
+  var timer = time - new Date().getTime();
+  timer = parseInt(timer / 1000);
+  if (timer < 0) {
+    return false;
+  } else {
+    return true;
+  }
+};
