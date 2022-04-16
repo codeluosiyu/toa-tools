@@ -121,3 +121,33 @@ export function funcUrlDel(name: string) {
     return url;
   }
 }
+
+/**
+ * 解析页面URL参数params(并处理 decodeURIComponent )
+ * @param name
+ * @returns
+ */
+export const delUrlParam = (name: string) => {
+  let loca = window.location;
+  let baseUrl = loca.origin + loca.pathname + "?";
+  let query = decodeURIComponent(loca.search.split("?")[1]);
+  if (!query) return loca;
+
+  if (loca.href.indexOf(name) < 0) return loca.href;
+
+  let obj = {};
+  let arr: any = query.indexOf("&") > -1 ? query.split("&") : [query];
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = arr[i].split("=");
+    obj[arr[i][0]] = arr[i][1];
+  }
+  delete obj[name];
+
+  const url =
+    baseUrl +
+    JSON.stringify(obj)
+      .replace(/[\"\{\}]/g, "")
+      .replace(/\:/g, "=")
+      .replace(/\,/g, "&");
+  return url;
+};
