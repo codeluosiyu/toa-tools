@@ -256,3 +256,21 @@ export const checkTimeStamp = (time) => {
     return true;
   }
 };
+
+/**
+ * IOS格式时间 转 国际UTC标准时间
+ * @param data
+ * @returns
+ */
+export const iosDateToUtc = (data: string) => {
+  return JSON.parse(
+    JSON.stringify(data).replace(
+      /\/Date\(\-?(\d+)(?:\-|\+)(?:\d+)\)\//g,
+      function () {
+        return new Date(Number(arguments[1]) + 8 * 3600 * 1000)
+          .toISOString()
+          .replace(/^(.*)T(.*)\.\d+Z$/, "$1 $2");
+      }
+    )
+  );
+};
