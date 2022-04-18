@@ -248,7 +248,7 @@ export const checkTimeStamp = (time) => {
   if (time < 90000000000) {
     time *= 1000;
   }
-  var timer = time - new Date().getTime();
+  var timer: number = time - new Date().getTime();
   timer = parseInt(timer / 1000);
   if (timer < 0) {
     return false;
