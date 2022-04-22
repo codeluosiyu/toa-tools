@@ -274,3 +274,39 @@ export const iosDateToUtc = (data: string) => {
     )
   );
 };
+
+/**
+ * 返回当前时间
+ * @param type
+ * @param addTime
+ * @returns
+ */
+export function returnNowTime(type, addTime) {
+  var dateObj = new Date();
+  var cTime = dateObj.getTime();
+  if (addTime) {
+    cTime += addTime;
+  }
+  if (!type) {
+    type = "number";
+  }
+  if (type == "number") {
+    return cTime;
+  }
+  if (type == "YYYYMMDD") {
+    var timeStamp = parseInt(cTime);
+    var date = new Date();
+    if (timeStamp < 90000000000) {
+      date.setTime(timeStamp * 1000);
+    } else {
+      date.setTime(timeStamp);
+    }
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? "0" + m : m;
+    var d = date.getDate();
+    d = d < 10 ? "0" + d : d;
+    return y + m + d;
+  }
+  return this.toDate(cTime / 1000, "str");
+}
