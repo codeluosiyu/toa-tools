@@ -310,3 +310,35 @@ export function returnNowTime(type, addTime) {
   }
   return this.toDate(cTime / 1000, "str");
 }
+
+/**
+ * 返回2个UTC时间之间的时间差
+ * @param startTime
+ * @param endTime
+ * @returns
+ */
+export const getDateDiff = (startTime, endTime) => {
+  //将日期字符串转换为时间戳
+  var sTime = new Date(startTime).getTime(); //开始时间
+  var eTime = new Date(endTime).getTime(); //结束时间
+  //作为除数的数字
+  var divNumSecond = 1000;
+  var divNumMinute = 1000 * 60;
+  var divNumHour = 1000 * 3600;
+  var divNumDay = 1000 * 3600 * 24;
+
+  const day = parseInt((eTime - sTime) / parseInt(divNumDay));
+  const hour = parseInt(
+    ((eTime - sTime) % parseInt(divNumDay)) / parseInt(divNumHour)
+  );
+  const minute = parseInt(
+    parseInt(((eTime - sTime) % parseInt(divNumDay)) % parseInt(divNumHour)) /
+      parseInt(divNumMinute)
+  );
+  const second =
+    (parseInt(((eTime - sTime) % parseInt(divNumDay)) % parseInt(divNumHour)) %
+      parseInt(divNumMinute)) /
+    parseInt(divNumSecond);
+  const str = day + "天" + hour + "小时" + minute + "分" + second + "秒";
+  return str;
+};
