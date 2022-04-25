@@ -151,3 +151,146 @@ export const delUrlParam = (name: string) => {
       .replace(/\,/g, "&");
   return url;
 };
+
+/**
+ * URLSearchParams
+ * @param url String   可选参数， url地址
+ * @param OneKey String   可选参数， 获取当前网址指定参数
+ * @param Delete_key Array    可选参数， 过滤指定参数
+ * @returns
+ */
+export const getUrlData = function (url, OneKey, Delete_key = []) {
+  if (!url) url = window.location.search;
+  var url_l = url.split("?")[1];
+  var url_ll = url_l.split("&"),
+    obj = {};
+  url_ll.forEach((item, idx) => {
+    var key = item.split("=")[0];
+    var val = item.split("=")[1];
+    if (Delete_key.indexOf(key) == -1) obj[key] = val;
+  });
+  if (OneKey && url_l.indexOf(OneKey)) return obj[OneKey];
+  return obj;
+};
+
+/**
+ * 获取单个参数
+ * @param  {String} name
+ * @param  {String} url   [default:location.href]
+ * @return {String|Boolean}
+ */
+export const getParam = (name, url) => {
+  if (typeof name !== "string") return false;
+  if (!url) url = window.location.href;
+  // 当遇到name[xx]时，对方括号做一下转义为 name\[xxx\]，因为下面还需要使用name做正则
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+  var results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return "";
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
+/**
+ * 设置单个参数
+ * @param name
+ * @param val
+ * @param url
+ * @returns
+ */
+export const setParam = (name, val, url) => {
+  if (typeof name !== "string") return false;
+  if (!url) url = window.location.href;
+  var _name = name.replace(/[\[\]]/g, "\\$&");
+  var value = name + "=" + encodeURIComponent(val);
+  var regex = new RegExp(_name + "=[^&]*");
+  var urlArr = url.split("#");
+  var result = "";
+
+  if (regex.exec(url)) {
+    result = url.replace(regex, value);
+  } else {
+    result = urlArr[0] + "&" + value + (urlArr[1] || "");
+  }
+
+  return result;
+};
+
+/**
+ * 移除单个参数
+ * @param name
+ * @param url
+ * @returns
+ */
+export const removeParam = (name, url) => {
+  if (typeof name !== "string") return false;
+  if (!url) url = window.location.href;
+  var urlparts = url.split("?");
+  var prefix = encodeURIComponent(name + "=");
+  var pars = urlparts[1].split(/[&;]/g);
+  var i = 0,
+    len = pars.length;
+
+  for (; i < len; i++) {
+    if (encodeURIComponent(pars[i]).lastIndexOf(prefix, 0) !== -1) {
+      pars.splice(i, 1);
+    }
+  }
+
+  url = urlparts[0] + (pars.length > 0 ? "?" + pars.join("&") : "");
+
+  return url;
+};
+
+/**
+ * 获取多个参数
+ * @param  {String} names [多个用空格分割]
+ * @param  {String} url   [default:location.href]
+ * @return {[String|Boolean]}
+ */
+export const getParams = (names, url) => {
+  if (typeof name !== "string") return false;
+  var names = names.split(" ");
+  var result = {};
+  var i = 0,
+    len = names.length;
+  if (names.length === 0) return false;
+  for (; i < len; i++) {
+    result[names[i]] = getParam(names[i], url);
+  }
+  return result;
+};
+
+/**
+ * 设置多个参数
+ * @param {Object} obj
+ * @param  {String} url   [default:location.href]
+ * @return {[String|Boolean]}
+ */
+export const setParams = (obj, url) => {
+  var result = url || "";
+  if (Object.prototype.toString.call(obj) !== "[object Object]") return false;
+  for (var name in obj) {
+    result = setParam(name, obj[name], result);
+  }
+  return result;
+};
+
+/**
+ * 移除多个参数
+ * @param  {String} names [多个用空格分割]
+ * @param  {String} url   [default:location.href]
+ * @return {[String|Boolean]}
+ */
+export const removeParams = (names, url) => {
+  var result = url || "";
+  var names = names.split(" ");
+  var i = 0,
+    len = names.length;
+  if (names.length === 0) return false;
+
+  for (; i < len; i++) {
+    result = removeParam(names[i], result);
+  }
+  return result;
+};
