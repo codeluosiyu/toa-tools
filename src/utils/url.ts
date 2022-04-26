@@ -244,8 +244,8 @@ export const removeParam = (name, url) => {
 
 /**
  * 获取多个参数
- * @param  {String} names [多个用空格分割]
- * @param  {String} url   [default:location.href]
+ * @param  {String} names
+ * @param  {String} url
  * @return {[String|Boolean]}
  */
 export const getParams = (names, url) => {
@@ -264,7 +264,7 @@ export const getParams = (names, url) => {
 /**
  * 设置多个参数
  * @param {Object} obj
- * @param  {String} url   [default:location.href]
+ * @param  {String} url
  * @return {[String|Boolean]}
  */
 export const setParams = (obj, url) => {
@@ -278,8 +278,8 @@ export const setParams = (obj, url) => {
 
 /**
  * 移除多个参数
- * @param  {String} names [多个用空格分割]
- * @param  {String} url   [default:location.href]
+ * @param  {String} names
+ * @param  {String} url
  * @return {[String|Boolean]}
  */
 export const removeParams = (names, url) => {
