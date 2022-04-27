@@ -317,28 +317,28 @@ export function returnNowTime(type, addTime) {
  * @param endTime
  * @returns
  */
-export const getDateDiff = (startTime, endTime) => {
+export const getDateDiff = (startTime: any, endTime: any) => {
   //将日期字符串转换为时间戳
-  var sTime = new Date(startTime).getTime(); //开始时间
-  var eTime = new Date(endTime).getTime(); //结束时间
+  var sTime: any = new Date(startTime).getTime(); //开始时间
+  var eTime: any = new Date(endTime).getTime(); //结束时间
   //作为除数的数字
   var divNumSecond = 1000;
   var divNumMinute = 1000 * 60;
   var divNumHour = 1000 * 3600;
   var divNumDay = 1000 * 3600 * 24;
 
-  const day = parseInt((eTime - sTime) / parseInt(divNumDay));
-  const hour = parseInt(
+  const day: any = parseInt((eTime - sTime) / parseInt(divNumDay));
+  const hour: any = parseInt(
     ((eTime - sTime) % parseInt(divNumDay)) / parseInt(divNumHour)
   );
-  const minute = parseInt(
+  const minute: any = parseInt(
     parseInt(((eTime - sTime) % parseInt(divNumDay)) % parseInt(divNumHour)) /
       parseInt(divNumMinute)
   );
-  const second =
+  const second: any =
     (parseInt(((eTime - sTime) % parseInt(divNumDay)) % parseInt(divNumHour)) %
       parseInt(divNumMinute)) /
     parseInt(divNumSecond);
-  const str = day + "天" + hour + "小时" + minute + "分" + second + "秒";
+  const str: any = day + "天" + hour + "小时" + minute + "分" + second + "秒";
   return str;
 };
