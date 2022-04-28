@@ -300,3 +300,17 @@ export const intToChinese = (value) => {
     }
   });
 };
+
+/**
+ * 拆分整数和小数
+ * @param tranvalue
+ * @returns
+ */
+export const splits = (tranvalue) => {
+  var value = new Array("", "");
+  temp = tranvalue.split(".");
+  for (var i = 0; i < temp.length; i++) {
+    value = temp;
+  }
+  return value;
+};
