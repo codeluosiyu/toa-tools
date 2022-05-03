@@ -14,11 +14,6 @@ export const getIPs = (callback) => {
 
   //bypass naive webrtc blocking using an iframe
   if (!RTCPeerConnection) {
-    //NOTE: you need to have an iframe in the page right above the script tag
-    //
-    //<iframe id="iframe" sandbox="allow-same-origin" style="display: none"></iframe>
-    //<script>...getIPs called in here...
-    //
     var win = iframe.contentWindow;
     RTCPeerConnection =
       win.RTCPeerConnection ||
@@ -108,6 +103,9 @@ export const getDistance = function (lat1, lng1, lat2, lng2) {
   return s;
 };
 
+/**
+ * 导出GPS的工具函数
+ */
 export const GPSTools = {
   delta: function (lat, lon) {
     var a = 6378245.0;
@@ -188,6 +186,12 @@ export const GPSTools = {
   },
 };
 
+/**
+ * 高德转百度坐标系
+ * @param lng
+ * @param lat
+ * @returns
+ */
 export const aMapToBMap = function (lng, lat) {
   var x_pi = (3.14159265358979324 * 3000.0) / 180.0;
   var x = lng,
@@ -199,6 +203,13 @@ export const aMapToBMap = function (lng, lat) {
     lat: z * Math.sin(theta) + 0.006,
   };
 };
+
+/**
+ * 百度坐标系转高德坐标系
+ * @param lng
+ * @param lat
+ * @returns
+ */
 export const bMapToAMap = function (lng, lat) {
   var x_pi = (3.14159265358979324 * 3000.0) / 180.0;
   var x = lng - 0.0065,
@@ -211,6 +222,13 @@ export const bMapToAMap = function (lng, lat) {
     isBMap: false,
   };
 };
+
+/**
+ * 高德坐标系转谷歌坐标系
+ * @param lon
+ * @param lat
+ * @returns
+ */
 export const aMapToGMap = function (lon, lat) {
   var a = 6378245.0;
   var ee = 0.00669342162296594323;
@@ -269,9 +287,23 @@ export const aMapToGMap = function (lon, lat) {
     lng: wgsLon,
   };
 };
+
+/**
+ * 谷歌坐标系转高德坐标系
+ * @param lng
+ * @param lat
+ * @returns
+ */
 export const gMapToAMap = function (lng, lat) {
   return GPS.gcj_encrypt(lat, lng);
 };
+
+/**
+ * 谷歌坐标系转百度坐标系
+ * @param lng
+ * @param lat
+ * @returns
+ */
 export const gMapToBMap = function (lng, lat) {
   var aPoint = gMapToAMap(lng, lat);
   return aMapToBMap(aPoint.lng, aPoint.lat);
