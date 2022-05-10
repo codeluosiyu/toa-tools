@@ -366,17 +366,6 @@ export function openWindow(
 }
 
 /**
- * 自适应页面（rem）
- * @param { number } width
- */
-export function AutoResponse(width = 750) {
-  const target = document.documentElement;
-  target.clientWidth >= 600
-    ? (target.style.fontSize = "80px")
-    : (target.style.fontSize = (target.clientWidth / width) * 100 + "px");
-}
-
-/**
  * 客户端检测，并返回客户端的详细信息
  * @param w
  * @param nav
