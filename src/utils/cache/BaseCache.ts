@@ -66,3 +66,24 @@ export const getCookit = (key) => {
   }
   return "";
 };
+
+export const getCookie = (key, cookies) => {
+  var value = "";
+  var isInBrowser = typeof window !== "undefined";
+  if (!cookies) {
+    if (isInBrowser) {
+      cookies = document.cookie;
+    } else {
+      return value;
+    }
+  }
+  var cookieArr = cookies.split("; ");
+  for (var i = 0, cookie = void 0, index = void 0; i < cookieArr.length; i++) {
+    cookie = cookieArr[i];
+    index = cookie.indexOf("=");
+    if (cookie.substr(0, index) === key) {
+      value = cookie.substr(index + 1);
+    }
+  }
+  return value;
+};
