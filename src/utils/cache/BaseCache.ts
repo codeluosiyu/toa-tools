@@ -8,7 +8,7 @@ export const getSession = (name) => {
   } else {
     let v = "";
     try {
-      v = JSON.parse(sessionStorage.getItem(name)).v; //try---如果‘name’是个{}，并且存在set赋值得v。那么return v 出去，否则catch抛出去
+      v = JSON.parse(sessionStorage.getItem(name)).v;
       if (v === undefined) {
         v = JSON.parse(sessionStorage.getItem(name));
       }

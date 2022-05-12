@@ -16,3 +16,16 @@ export const findDuplicates = function (nums) {
 
   return res;
 };
+
+/**
+ * 数组对象去重
+ * @param arr
+ * @param key
+ * @param hash
+ * @returns
+ */
+export const unique = (arr: AnyArray, key: string, hash: any = {}) =>
+  arr.reduce(function (item, next) {
+    hash[next[key]] ? "" : (hash[next[key]] = true && item.push(next));
+    return item;
+  }, []);
