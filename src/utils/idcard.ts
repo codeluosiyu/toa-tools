@@ -117,6 +117,82 @@ export const checkIdcard = (idcard: number | string) => {
       break;
   }
 };
+
+// 计算最后一位应该是多少
+function idCardEndNum(idCard) {
+  idCard = idCard.toString();
+  var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+  var parity = [1, 0, "X", 9, 8, 7, 6, 5, 4, 3, 2];
+  var sum = 0;
+  var ai = 0;
+  var wi = 0;
+  for (var i = 0; i < 17; i++) {
+    ai = idCard[i];
+    wi = factor[i];
+    sum += ai * wi;
+  }
+  var last = parity[sum % 11];
+  return last;
+}
+
+// 解析生日信息
+function birthDay(idCard) {
+  idCard = idCard.toString();
+  var birthday, month, day, nong;
+  let year = idCard.substr(6, 4);
+  month = idCard.substr(10, 2);
+  day = idCard.substr(12, 2);
+  birthday = year + "/" + month + "/" + day;
+  nong = Nong(birthday);
+  let nongyear = nong.substr(0, 4);
+  return {
+    date: birthday,
+    nong: nong,
+    year: year,
+    month: month,
+    day: day,
+    nongCn: NongCn(birthday),
+    week: dict.week(birthday), // 星期几
+    zodiac: dict.zodiac(month, day), // 星座
+    zodiac_zh: dict.zodiac_zh(nongyear), // 生肖
+  };
+}
+
+// 验证身份证号是否正确
+function checkIdCard(idCard) {
+  idCard = idCard.toString();
+  if (/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(idCard)) {
+    if (idCard.length >= 18) {
+      return idCardEndNum(idCard) == idCard[17].toUpperCase();
+    } else {
+      return false;
+    }
+  }
+  return false;
+}
+
+// 补全身份证号
+function repairIdCard(idCard) {
+  idCard = idCard.toString();
+  if (/(^\d{17}$)/.test(idCard)) return idCard + idCardEndNum(idCard);
+  if (/(^\d{18}$)/.test(idCard))
+    return idCard.slice(0, 17) + idCardEndNum(idCard);
+}
+
+// 15位转换18位
+function num15to18(idCard) {
+  idCard = idCard.toString();
+  if (/(^\d{15}$)/.test(idCard))
+    return repairIdCard(idCard.slice(0, 6) + "19" + idCard.slice(6, 15));
+}
+
+// 性别解析
+function sex(idCard) {
+  idCard = idCard.toString();
+  if (idCard[16] % 2) return "男";
+  return "女";
+}
+
 export default {
   checkIdcard: checkIdcard,
 };
