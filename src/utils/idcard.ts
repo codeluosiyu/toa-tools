@@ -118,7 +118,11 @@ export const checkIdcard = (idcard: number | string) => {
   }
 };
 
-// 计算最后一位应该是多少
+/**
+ * 计算最后一位应该是多少
+ * @param idCard
+ * @returns
+ */
 function idCardEndNum(idCard) {
   idCard = idCard.toString();
   var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
