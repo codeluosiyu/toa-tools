@@ -71,3 +71,14 @@ export const getExtension = (str) => {
   str = str.split(".");
   return str.pop();
 };
+
+/**
+ * 字符串大小写取反
+ * @param str
+ * @returns
+ */
+export const transfer = (str) => {
+  return str.replace(/[a-zA-Z]/g, (match) => {
+    return /[a-z]/.test(match) ? match.toUpperCase() : match.toLowerCase();
+  });
+};
