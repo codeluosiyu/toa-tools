@@ -333,7 +333,7 @@ export const getDateDiff = (startTime: any, endTime: any) => {
   );
   const minute: any = parseInt(
     parseInt(((eTime - sTime) % parseInt(divNumDay)) % parseInt(divNumHour)) /
-      parseInt(divNumMinute)
+    parseInt(divNumMinute)
   );
   const second: any =
     (parseInt(((eTime - sTime) % parseInt(divNumDay)) % parseInt(divNumHour)) %
@@ -405,4 +405,29 @@ export const constellation = (mon, day) => {
     return words[11];
   }
   return "";
+};
+
+/**
+ * 生成一个不重复的随机数组
+ *
+ * @param {number} len 数组长度
+ * @param {number} min 最小随机数
+ * @param {number} max 最大随机数
+ * @return {array} 不重复的随机数组
+ */
+export const randomUniqueArr = (len, min, max) => {
+  if (max - min < len) {
+    // 可生成数的范围小于数组长度
+    return null;
+  }
+  const hash = [];
+
+  while (hash.length < len) {
+    const num = Math.floor(Math.random() * 100);
+
+    if (hash.indexOf(num) === -1) {
+      hash.push(num);
+    }
+  }
+  return hash;
 };

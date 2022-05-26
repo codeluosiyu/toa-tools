@@ -197,6 +197,8 @@ function sex(idCard) {
   return "女";
 }
 
+
+
 export default {
   checkIdcard: checkIdcard,
 };
