@@ -431,3 +431,40 @@ export const randomUniqueArr = (len, min, max) => {
   }
   return hash;
 };
+
+/**
+ * 判断某一年是否是闰年
+ * @param year 可以是一个date类型，也可以是一个int类型的年份，不传默认当前时间
+ */
+export const _isLeapYear = (year) => {
+  if (year === undefined) year = new Date();
+  if (year instanceof Date) year = year.getFullYear();
+  return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+/**
+ * 获取某一年某一月的总天数，没有任何参数时获取当前月份的
+ * 方式一：dateUtils.getDaysOfMonth();
+ * 方式二：dateUtils.getDaysOfMonth(new Date());
+ * 方式三：dateUtils.getDaysOfMonth(2013, 12);
+ */
+export const _getDaysOfMonth = (date, month) => {
+  var y, m;
+  if (date == undefined) date = new Date();
+  if (date instanceof Date) {
+    y = date.getFullYear();
+    m = date.getMonth();
+  }
+  else if (typeof date == 'number') {
+    y = date;
+    m = month - 1;
+  } else if (typeof date == 'String') {
+    var strdate = new Date(date);
+    y = strdate.getFullYear();
+    m = strdate.getMonth();
+  }
+  var days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 非闰年的一年中每个月份的天数
+  //如果是闰年并且是2月
+  if (m == 1 && _isLeapYear(y)) return days[m] + 1;
+  return days[m];
+}
