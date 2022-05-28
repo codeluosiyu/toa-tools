@@ -283,7 +283,7 @@ export const iosDateToUtc = (data: string) => {
  */
 export function returnNowTime(type, addTime) {
   var dateObj = new Date();
-  var cTime = dateObj.getTime();
+  var cTime: any = dateObj.getTime();
   if (addTime) {
     cTime += addTime;
   }
@@ -302,9 +302,9 @@ export function returnNowTime(type, addTime) {
       date.setTime(timeStamp);
     }
     var y = date.getFullYear();
-    var m = date.getMonth() + 1;
+    var m: any = date.getMonth() + 1;
     m = m < 10 ? "0" + m : m;
-    var d = date.getDate();
+    var d: any = date.getDate();
     d = d < 10 ? "0" + d : d;
     return y + m + d;
   }
