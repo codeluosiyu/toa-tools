@@ -100,3 +100,12 @@ export const random = function (min: number, max: number): number {
 export const isEmptyObj = function (obj) {
   return JSON.stringify(obj) === "{}";
 };
+
+/**
+ * 判断是不是一个空对象
+ * @param obj 
+ * @returns 
+ */
+export const isPlainObject = (obj) => {
+  return typeof obj == "object" && Object.getPrototypeOf(obj) === Object.prototype
+}
