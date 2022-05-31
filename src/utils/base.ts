@@ -1,4 +1,7 @@
-// --- 数组操作 ---
+/**
+ * 数组合并
+ * @returns 
+ */
 export const arrayConcat = function () {
   var tmpArr = [];
   for (let i = 0; i < arguments.length; i++) {
@@ -7,6 +10,10 @@ export const arrayConcat = function () {
   return tmpArr;
 };
 
+/**
+ * 删除数组指定部分
+ * @returns 
+ */
 export const arrayDrop = function (array, index, howmany) {
   if (!index) {
     index = 0;
@@ -18,6 +25,10 @@ export const arrayDrop = function (array, index, howmany) {
   return array;
 };
 
+/**
+ * 检查数组是否包含
+ * @returns 
+ */
 export const arrayIndexOf = function (arr, needFind) {
   var index = -1;
   for (let i = 0; i < arr.length; i++) {
@@ -29,6 +40,10 @@ export const arrayIndexOf = function (arr, needFind) {
   return index;
 };
 
+/**
+ * 检查数组不同
+ * @returns 
+ */
 export const arrayDifference = function (a, b) {
   const set = new Set(b);
   return a.filter((x) => !set.has(x));
