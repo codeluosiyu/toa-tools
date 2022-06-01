@@ -109,3 +109,17 @@ export const isEmptyObj = function (obj) {
 export const isPlainObject = (obj) => {
   return typeof obj == "object" && Object.getPrototypeOf(obj) === Object.prototype
 }
+
+/**
+ * curry函数
+ */
+export const curry (fn) {
+  function inner(len, arg) {
+    if (len == 0)
+      return fn.apply(null, arg)
+    return function (x) {
+      return inner(len - 1, arg.concat(x))
+    }
+  }
+  return inner(fn.length, [])
+}
