@@ -123,3 +123,28 @@ export const curry (fn) {
   }
   return inner(fn.length, [])
 }
+
+
+/**
+ * 生成一个不重复的随机数组
+ * @param {number} len 数组长度
+ * @param {number} min 最小随机数
+ * @param {number} max 最大随机数
+ * @return {array} 不重复的随机数组
+ */
+export const randomUniqueArr = (len, min, max) => {
+  if (max - min < len) {
+    // 可生成数的范围小于数组长度
+    return null;
+  }
+  const hash = [];
+
+  while (hash.length < len) {
+    const num = Math.floor(Math.random() * 100);
+
+    if (hash.indexOf(num) === -1) {
+      hash.push(num);
+    }
+  }
+  return hash;
+};
