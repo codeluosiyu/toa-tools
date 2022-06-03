@@ -134,7 +134,6 @@ export const curry (fn) {
  */
 export const randomUniqueArr = (len, min, max) => {
   if (max - min < len) {
-    // 可生成数的范围小于数组长度
     return null;
   }
   const hash = [];
