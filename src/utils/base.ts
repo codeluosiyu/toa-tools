@@ -147,3 +147,30 @@ export const randomUniqueArr = (len, min, max) => {
   }
   return hash;
 };
+
+/**
+ * 将嵌套的数组转换为扁平的数组，并按照从小到大排序
+ * @param arr 
+ * @returns 
+ */
+export const arrayFlatten = (arr) => {
+  var res = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      res = res.concat(flatten(arr[i]));  // 如果是数组，就使用concat()函数连接数组
+    } else {
+      res.push(arr[i]);  // 将数组项的值放进数组res中
+    }
+  }
+  function compare(value1, value2) {
+    if (value1 < value2) {
+      return -1;
+    } else if (value1 > value2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+  res.sort(compare);
+  return res;
+}
