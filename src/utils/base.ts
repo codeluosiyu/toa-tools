@@ -174,3 +174,14 @@ export const arrayFlatten = (arr) => {
   res.sort(compare);
   return res;
 }
+
+export const startsWith(target, str, ignorecase) {
+  var start_str = target.substr(0, str.length);
+  return ignorecase ? start_str.toLowerCase() === str.toLowerCase() : start_str === str;
+}
+
+export const endsWith(target, str, ignorecase) {
+  var end_str = target.substring(target.length - str.length);
+  return ignorecase ? end_str.toLowerCase() === str.toLowerCase();
+  end_str === str;
+}
