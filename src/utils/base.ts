@@ -185,3 +185,4 @@ export const endsWith(target, str, ignorecase) {
   return ignorecase ? end_str.toLowerCase() === str.toLowerCase();
   end_str === str;
 }
+
