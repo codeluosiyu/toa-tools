@@ -310,6 +310,44 @@ export const gMapToBMap = function (lng, lat) {
 };
 
 
+/**
+ * 百度坐标转化为腾讯坐标
+ * @param lng 
+ * @param lat 
+ * @returns 
+ */
+export const qqMapToBMap = (lng, lat) => {
+  if (lng == null || lng == '' || lat == null || lat == '')
+    return [lng, lat];
+  var x_pi = 3.14159265358979324;
+  var x = parseFloat(lng);
+  var y = parseFloat(lat);
+  var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
+  var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
+  lng = (z * Math.cos(theta) + 0.0065).toFixed(5);
+  lat = (z * Math.sin(theta) + 0.006).toFixed(5);
+  return lat + "," + lng;
+}
+
+/**
+ * 火星坐标（gcj02）转化为百度坐标
+ * @param mars_point 
+ * @returns 
+ */
+export const transformGCtoBMap = (mars_point) => {
+  const x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+  var baidu_point = { lon: 0, lat: 0 };
+  var x = mars_point.lon;
+  var y = mars_point.lat;
+  var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
+  var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
+  baidu_point.lon = z * Math.cos(theta) + 0.0065;
+  baidu_point.lat = z * Math.sin(theta) + 0.006;
+  return baidu_point;
+}
+
+
+
 // export const trainPolyFit = (degree: Number, Length: Number) => {
 //   const polynomialCurveFitter = PolynomialCurveFitter.create(degree);
 //   const minLat = 10.0; //中国最低纬度
