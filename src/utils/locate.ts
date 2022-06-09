@@ -347,28 +347,3 @@ export const transformGCtoBMap = (mars_point) => {
 }
 
 
-
-// export const trainPolyFit = (degree: Number, Length: Number) => {
-//   const polynomialCurveFitter = PolynomialCurveFitter.create(degree);
-//   const minLat = 10.0; //中国最低纬度
-//   const maxLat = 60.0; //中国最高纬度
-//   const interv = (maxLat - minLat) / (double)Length;
-//   List < WeightedObservedPoint > weightedObservedPoints = new ArrayList<WeightedObservedPoint>();
-//   for (int i = 0; i < Length; i++) {
-//       WeightedObservedPoint weightedObservedPoint = new WeightedObservedPoint(1, minLat + (double)i * interv, Math.cos(toRadians(x[i])));
-//     weightedObservedPoints.add(weightedObservedPoint);
-//   }
-//   return polynomialCurveFitter.fit(weightedObservedPoints);
-// }
-
-// export const distanceSimplifyMore = (lat1, lng1, lat2, lng2, a: Array<Number>) => {
-//   //1 计算三个参数
-//   const dx = lng1 - lng2; // 经度差值
-//   const dy = lat1 - lat2; // 纬度差值
-//   const b = (lat1 + lat2) / 2.0; // 平均纬度
-//   //2 计算东西方向距离和南北方向距离(单位：米)，东西距离采用三阶多项式
-//   const Lx = (a[3] * b * b * b + a[2] * b * b + a[1] * b + a[0]) * toRadians(dx) * 6367000.0; // 东西距离
-//   const Ly = 6367000.0 * toRadians(dy); // 南北距离
-//   //3 用平面的矩形对角距离公式计算总距离
-//   return Math.sqrt(Lx * Lx + Ly * Ly);
-// }

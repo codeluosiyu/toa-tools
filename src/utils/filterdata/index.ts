@@ -75,3 +75,20 @@ export const isEmojiCharacter = (substring) => {
     }
   }
 };
+
+/**
+ * 根据指定条件（如回调对象的某个属性）进行分组 构成对象返回。
+ * @param target 
+ * @param val 
+ */
+export const groupBy = (target, val) => {
+  var result = {};
+  var iterator = typeof val == "function" ? val : function (obj) {
+    return obj[val];
+  }
+  target.forEach(function (value, index) {
+    var key = iterator(value, index);
+    (result[key] || (result[key] = [])).push(value);
+  });
+  return result;
+}
