@@ -186,3 +186,23 @@ export const endsWith(target, str, ignorecase) {
   end_str === str;
 }
 
+/**
+ * 分割数组
+ * @param nums 
+ * @returns 
+ */
+export const partitionDisjoint (nums: string | any[])  {
+  let n = nums.length;
+  let maxLeft = new Array(n).fill(Number.MIN_SAFE_INTEGER);
+  let minRight = new Array(n).fill(Number.MAX_SAFE_INTEGER);
+  maxLeft[0] = nums[0];
+  minRight[n - 1] = nums[n - 1];
+  for (let i = 1, j = n - 2; i < n; i++, j--) {
+    maxLeft[i] = Math.max(nums[i], maxLeft[i - 1]);
+    minRight[j] = Math.min(nums[j], minRight[j + 1]);
+  }
+  for (let i = 1; i < n; i++) {
+    if (maxLeft[i - 1] <= minRight[i]) return i;
+  }
+  return -1;
+}
