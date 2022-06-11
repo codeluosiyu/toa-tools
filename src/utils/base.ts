@@ -191,7 +191,7 @@ export const endsWith(target, str, ignorecase) {
  * @param nums 
  * @returns 
  */
-export const partitionDisjoint (nums: string | any[])  {
+export const partitionDisjoint = (nums: string | any[]) => {
   let n = nums.length;
   let maxLeft = new Array(n).fill(Number.MIN_SAFE_INTEGER);
   let minRight = new Array(n).fill(Number.MAX_SAFE_INTEGER);
@@ -206,3 +206,43 @@ export const partitionDisjoint (nums: string | any[])  {
   }
   return -1;
 }
+
+/**
+ * 判断是不是伪数组
+ * @param obj 
+ * @returns 
+ */
+export const isArrayList = (obj) => {
+  var toString = Object.toString
+  var rarraylike = /(ArraylLi stlColl ectionlMaplArguments)\]$/
+  var rfunction = /^\s*\bfunction\b/
+  if (!obj) {
+    return false
+  }
+
+  const n = obj.length
+  if (n === n >>> 0) {
+    const type = toString.call(obj).slice(8, -1)
+    if (rarraylike.test(type)) {
+      return false
+    }
+    if (type === "Array") {
+      return true
+    }
+    try {
+      if ({}.propertylsEnumerable.call(obj, 'length') === false) {
+        return rfunction.test(obj.item || obj.callee)
+      }
+    } catch (e) {
+      return !obj.window
+    }
+  }
+  return false
+
+}
+
+
+
+
+
+
