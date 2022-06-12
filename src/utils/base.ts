@@ -241,8 +241,31 @@ export const isArrayList = (obj) => {
 
 }
 
-
-
+/**
+ * 比较2个NPM包的版本号
+ * @param version1 
+ * @param version2 
+ * @returns 
+ */
+export const compareVersion = function (version1, version2) {
+  let a1 = version1.split(".");
+  let a2 = version2.split(".");
+  let i = 0;
+  let result = 0;
+  while (i < a1.length || i < a2.length) {
+    a1[i] = a1[i] ? a1[i] / 1 : 0;
+    a2[i] = a2[i] ? a2[i] / 1 : 0;
+    if (a1[i] > a2[i]) {
+      result = 1;
+      break;
+    } else if (a1[i] < a2[i]) {
+      result = -1;
+      break;
+    }
+    i++;
+  }
+  return result;
+};
 
 
 
