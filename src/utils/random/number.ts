@@ -28,3 +28,84 @@ export const shuffleArray = (arr) => {
   return arr;
 }
 
+/**
+ * 切分数组
+ * @param nums 
+ * @returns 
+ */
+export const splitArray = (nums) => {
+  return bfs(nums, divide(nums));
+  function bfs(nums, { factors, multiples }) {
+    const n = nums.length;
+    const steps = Array.from({ length: n + 1 }, () => Infinity);
+    steps[0] = 0;
+    let status = new Set([0]);
+    while (status.size) {
+      const status2 = new Set();
+      for (const i of status) {
+        const step = steps[i] + 1;
+        for (const [factor, next] of factors[i]) {
+          const multiple = multiples.get(factor);
+          for (let j = next; j < multiple.length; j++) {
+            const index = multiple[j] + 1;
+            if (step < steps[index]) {
+              steps[index] = step;
+              if (index < n) status2.add(index);
+            }
+          }
+        }
+      }
+      status = status2;
+    }
+    return steps[n];
+  }
+
+  function divide(nums) {
+    const n = nums.length;
+    const max = Math.max(...nums);
+    const positions = new Map();
+    for (let i = 0; i < n; i++) {
+      const num = nums[i];
+      if (!positions.has(num)) {
+        positions.set(num, []);
+      }
+      positions.get(num).push(i);
+    }
+
+    const factors = Array.from({ length: n }, () => new Map());
+    const multiples = new Map();
+
+    const isPrimes = Array(max + 1).fill(true);
+    isPrimes[0] = false;
+    isPrimes[1] = false;
+    for (let i = 2; i <= max; i++) {
+      if (isPrimes[i]) {
+        if (positions.has(i)) {
+          for (const index of positions.get(i)) {
+            addFactor(i, index);
+          }
+        }
+        for (let j = i + i; j <= max; j += i) {
+          isPrimes[j] = false;
+          if (positions.has(j)) {
+            for (const index of positions.get(j)) {
+              addFactor(i, index);
+            }
+          }
+        }
+        if (multiples.has(i)) {
+          multiples.get(i).sort((a, b) => a - b);
+        }
+      }
+    }
+    return { factors, multiples };
+
+    function addFactor(factor, i) {
+      if (!multiples.has(factor)) {
+        multiples.set(factor, []);
+      }
+      factors[i].set(factor, multiples.get(factor).push(i) - 1);
+    }
+  }
+};
+
