@@ -39,7 +39,7 @@ export const splitArray = (nums) => {
     const n = nums.length;
     const steps = Array.from({ length: n + 1 }, () => Infinity);
     steps[0] = 0;
-    let status = new Set([0]);
+    let status: any = new Set([0]);
     while (status.size) {
       const status2 = new Set();
       for (const i of status) {
