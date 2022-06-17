@@ -175,11 +175,17 @@ export const arrayFlatten = (arr) => {
   return res;
 }
 
+/**
+ * 判断以X开头
+ */
 export const startsWith(target, str, ignorecase) {
   var start_str = target.substr(0, str.length);
   return ignorecase ? start_str.toLowerCase() === str.toLowerCase() : start_str === str;
 }
 
+/**
+ * 判断以X结尾
+ */
 export const endsWith(target, str, ignorecase) {
   var end_str = target.substring(target.length - str.length);
   return ignorecase ? end_str.toLowerCase() === str.toLowerCase();
