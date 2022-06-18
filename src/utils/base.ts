@@ -193,6 +193,16 @@ export const endsWith(target, str, ignorecase) {
 }
 
 /**
+ * limit方法，超出区间外，则取最近的区间边界值
+ */
+export const limitNumber = (target, n1, n2) => {
+  var a = [n1, n2].sort()
+  if (target < a[0]) return target = a[0]
+  if (target > a[1]) return target = a[1]
+  return target
+}
+
+/**
  * 分割数组
  * @param nums 
  * @returns 
