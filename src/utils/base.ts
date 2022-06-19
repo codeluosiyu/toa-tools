@@ -177,6 +177,10 @@ export const arrayFlatten = (arr) => {
 
 /**
  * 判断以X开头
+ * @param target 
+ * @param str 
+ * @param ignorecase 
+ * @returns 
  */
 export const startsWith(target, str, ignorecase) {
   var start_str = target.substr(0, str.length);
@@ -185,6 +189,10 @@ export const startsWith(target, str, ignorecase) {
 
 /**
  * 判断以X结尾
+ * @param target 
+ * @param str 
+ * @param ignorecase 
+ * @returns 
  */
 export const endsWith(target, str, ignorecase) {
   var end_str = target.substring(target.length - str.length);
@@ -194,6 +202,10 @@ export const endsWith(target, str, ignorecase) {
 
 /**
  * limit方法，超出区间外，则取最近的区间边界值
+ * @param target 
+ * @param n1 
+ * @param n2 
+ * @returns 
  */
 export const limitNumber = (target, n1, n2) => {
   var a = [n1, n2].sort()
