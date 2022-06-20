@@ -319,4 +319,25 @@ export const trim = (str) => {
 }
 
 
+/**
+ * 连续数组
+ * @param nums 
+ * @returns 
+ */
+export const findMaxLengthFromArr = (nums) => {
+  const n = nums.length;
+  const map = new Map();
+  map.set(0, -1);
+  let pre = 0;
+  let res = 0;
+  for (let i = 0; i < n; i++) {
+    pre += nums[i] == 0 ? -1 : 1;
+    if (map.has(pre)) {
+      res = Math.max(res, i - map.get(pre));
+    } else {
+      map.set(pre, i);
+    }
+  }
+  return res;
+};
 
