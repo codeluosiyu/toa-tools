@@ -82,3 +82,15 @@ export const transfer = (str) => {
     return /[a-z]/.test(match) ? match.toUpperCase() : match.toLowerCase();
   });
 };
+
+/**
+ * 全部替换
+ * @param str 
+ * @param replaceKey 
+ * @param replaceVal 
+ * @returns 
+ */
+export const replaceAll = (str, replaceKey, replaceVal) => {
+  var reg = new RegExp(replaceKey, 'g');
+  return str.replace(reg, replaceVal || '');
+}
