@@ -84,3 +84,18 @@ export const replaceAll = (str, replaceKey, replaceVal) => {
   var reg = new RegExp(replaceKey, 'g');
   return str.replace(reg, replaceVal || '');
 }
+
+/**
+ * 均分数组
+ * @param array 
+ * @param subGroupLength 
+ * @returns 
+ */
+export const averageArrGroup = (array, subGroupLength) => {
+  let index = 0;
+  let newArray = [];
+  while (index < array.length) {
+    newArray.push(array.slice(index, index += subGroupLength));
+  }
+  return newArray;
+}
