@@ -99,3 +99,31 @@ export const averageArrGroup = (array, subGroupLength) => {
   }
   return newArray;
 }
+
+/**
+ * toFixed修正版
+ * @param number 
+ * @param m 
+ * @returns 
+ */
+export const toFixed = (number, m) => {
+  if (typeof number !== 'number') {
+    throw new Error("target is not a number");
+  }
+  let result = Math.round(Math.pow(10, m) * number) / Math.pow(10, m);
+  result = String(result);
+  if (result.indexOf(".") == -1) {
+    if (m != 0) {
+      result += ".";
+      result += new Array(m + 1).join('0');
+    }
+  } else {
+    let arr = result.split('.');
+    if (arr[1].length < m) {
+      arr[1] += new Array(m - arr[1].length + 1).join('0')
+    }
+    result = arr.join('.')
+  }
+  return result
+}
+
