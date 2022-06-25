@@ -127,3 +127,18 @@ export const toFixed = (number, m) => {
   return result
 }
 
+/**
+ * 判断字符串是否为json字符串
+ * @param str 
+ * @returns 
+ */
+export const isJsonString = (str) => {
+  try {
+    if (typeof (JSON.parse(str)) === 'object') {
+      return true
+    }
+  } catch (e) {
+    return false
+  }
+  return false
+}
