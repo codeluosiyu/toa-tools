@@ -341,3 +341,53 @@ export const findMaxLengthFromArr = (nums) => {
   return res;
 };
 
+
+export const arrUnique = (arr) => {
+  arr.sort();
+  var re = [arr[0]];
+  for (var i = 1; i < arr.length; i++) {
+    if (arr[i] !== re[re.length - 1]) {
+      re.push(arr[i]);
+    }
+  }
+  return re;
+}
+
+export const qrrUnion = (arr, newArr) => {
+  return arr.concat(newArr).unique();
+
+}
+
+export const arrMinus = (arr, a) => {
+  var result = [];
+  var clone = arr;
+  for (var i = 0; i < clone.length; i++) {
+    var flag = true;
+    for (var j = 0; j < a.length; j++) {
+      if (clone[i] == a[j])
+        flag = false;
+    }
+    if (flag)
+      result.push(clone[i]);
+
+  }
+
+  return result.unique();
+
+}
+
+
+export const arrIntersect = (arr, b) => {
+  var result = [];
+  var a = arr;
+  for (var i = 0; i < b.length; i++) {
+    var temp = b[i];
+    for (var j = 0; j < a.length; j++) {
+      if (temp === a[j]) {
+        result.push(temp);
+        break;
+      }
+    }
+  }
+  return result.unique();
+}
