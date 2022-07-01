@@ -16,7 +16,7 @@ export const getAssetsType = async (obj: string) => {
  * @param targetWidth
  * @returns
  */
-export const getMediaHeight = async (obj: AnyObject, targetWidth = 750) => {
+export const getMediaHeight = async (obj: any, targetWidth = 750) => {
   let ratio = obj.width / obj.height;
   let targetHeight = targetWidth / ratio;
   return (targetHeight + 2).toFixed(2);
