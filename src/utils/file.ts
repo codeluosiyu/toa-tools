@@ -60,10 +60,6 @@ function charToBinary(text) {
 export const binaryTobase64 = (code) => {
   let base64Code = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
   let res = '';
-  // 1 bytes = 8bit，6bit 位替换成一个 base64 字符
-  // 所以每 3 bytes 的数据，能成功替换成 4 个 base64 字符
-
-  // 对不足 24 bit (也就是 3 bytes) 的情况进行特殊处理
   if (code.length % 24 === 8) {
     code += '0000';
     res += '=='
