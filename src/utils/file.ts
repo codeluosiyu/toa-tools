@@ -70,7 +70,6 @@ export const binaryTobase64 = (code) => {
   }
 
   let encode = '';
-  // code 按 6bit 一组，转换为
   for (let i = 0; i < code.length; i += 6) {
     let item = code.slice(i, i + 6);
     encode += base64Code[parseInt(item, 2)];
