@@ -340,3 +340,25 @@ export const findMaxLengthFromArr = (nums) => {
   }
   return res;
 };
+
+/**
+ * 数组嵌套 
+ * @param nums 
+ * @returns 
+ */
+export const arrayNesting = (nums: number[]): number => {
+  const dfs = (idx: number): number => {
+    if (nums[idx] == -1) {
+      return 0
+    }
+    let nxt = nums[idx]
+    nums[idx] = -1
+    return 1 + dfs(nxt)
+  }
+  let ans = 0
+  for (let i = 0; i < nums.length; i++) {
+    ans = Math.max(ans, dfs(i))
+  }
+  return ans
+};
+
