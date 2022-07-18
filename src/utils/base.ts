@@ -361,4 +361,25 @@ export const arrayNesting = (nums: number[]): number => {
   }
   return ans
 };
+  
+/**
+ * 替换数组中的元素
+ * @param {number[]} nums
+ * @param {number[][]} operations
+ * @return {number[]}
+ */
+export const arrayChange = (nums, operations) => {
+  const pos = new Map()
+  for (let i = 0; i < nums.length; i++) {
+    pos.set(nums[i], i)
+  }
+  for (const [prev, next] of operations) {
+    const prePos = pos.get(prev)
+    pos.delete(prev)
+    pos.set(next, prePos)
+    nums[prePos] = next
+  }
+  return nums
+};
+
 
