@@ -21,3 +21,16 @@ export const getMediaHeight = async (obj: any, targetWidth = 750) => {
   let targetHeight = targetWidth / ratio;
   return (targetHeight + 2).toFixed(2);
 };
+
+
+/**
+ * 获取资源后缀
+ * @param {*} file 
+ * @returns 
+ */
+export const getType = (file) => {
+    var index1 = filename.lastIndexOf(".");
+    var index2 = file.length;
+    var type = file.substring(index1, index2).toUpperCase();
+    return type;
+}
