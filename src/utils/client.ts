@@ -16,6 +16,82 @@ export const isClient = () => {
 };
 
 /**
+ * 取url参数
+ * @param {String} name url参数
+ * @param {Boolean} decodeSearch 是否对location.search整体解码一次, 默认true
+ * @return {String} url值
+ */
+export const getQuery = (name = "", decodeSearch = true) => {
+    const reg = new RegExp("(?:^|&)" + name + "=([^&]*)(?:&|$)", "i");
+    let search = location.search;
+    search = decodeSearch ? decodeURIComponent(search) : search;
+    const ret = search.substr(1).match(reg);
+    if (ret) return decodeURIComponent(ret[1]);
+    return "";
+};
+
+/**
+ * 获取所有url参数
+ * @param {Array} 需要排除的参数数组
+ * @return {Object} 参数键值对
+ */
+export const getQueryAll = (exclude = []) => {
+    const search = location.search;
+    const paramArr =
+        search !== "" ? search.split("?").pop().split("&") : [];
+    const paramObj = {};
+    paramArr.forEach(entry => {
+        const [key, value] = entry.split("=");
+        if (!exclude.includes(key)) {
+            paramObj[key] = decodeURIComponent(value);
+        }
+    });
+    return paramObj;
+};
+
+/**
+ * 更新页面的vconsole
+ */
+export const updatePageConsole = () => {
+    const console = getQuery("console");
+    const vconsoleUrl = "https://vncdn.mobi88.cn/public/vconsole.min.js";
+    const erudaUrl = "http://eruda.liriliri.io/eruda.min.js";
+
+    if (typeof window === "object" && window.require) {
+        if (console === "vconsole") {
+            window.require(
+                [vconsoleUrl],
+                function (VConsole) {
+                    new VConsole();
+                }
+            );
+        } else if (console === "eruda") {
+            window.require([erudaUrl], function (eruda) {
+                eruda.init();
+            });
+        }
+    } else {
+        if (console === "vconsole") {
+            appendElement("body", "script", {
+                src: vconsoleUrl,
+                onload: function () {
+                    if (typeof window.VConsole !== "undefined")
+                        new window.VConsole();
+                },
+            });
+        } else if (console === "eruda") {
+            appendElement("body", "script", {
+                src: erudaUrl,
+                onload: function () {
+                    if (typeof window.eruda !== "undefined")
+                        window.eruda.init();
+                },
+            });
+        }
+    }
+}
+
+/**
  * object转query
  * @param {Object} object参数
  * @return {String} query参数
