@@ -1,1 +1,1 @@
-console.log('hello toa-tools!');
+import { randomUniqueArr  } from "./utils/base.ts"
