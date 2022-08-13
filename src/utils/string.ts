@@ -5,10 +5,10 @@
  * @returns
  */
 export const count = (str, countSpace = true) => {
-  if (countSpace) {
-    return str.length;
-  }
-  return removeAllSpace(str).length;
+    if (countSpace) {
+        return str.length;
+    }
+    return removeAllSpace(str).length;
 };
 
 /**
@@ -17,7 +17,7 @@ export const count = (str, countSpace = true) => {
  * @returns
  */
 export const removeAllSpace = (str) => {
-  return str.replace(/\s+/g, "");
+    return str.replace(/\s+/g, "");
 };
 
 /**
@@ -26,7 +26,7 @@ export const removeAllSpace = (str) => {
  * @returns
  */
 export const trim = (str) => {
-  return str.trim();
+    return str.trim();
 };
 
 /**
@@ -35,7 +35,7 @@ export const trim = (str) => {
  * @returns
  */
 export const trimL = (str) => {
-  return str.replace(/^\s+/g, "");
+    return str.replace(/^\s+/g, "");
 };
 
 /**
@@ -44,7 +44,7 @@ export const trimL = (str) => {
  * @returns
  */
 export const trimR = (str) => {
-  return str.replace(/\s+$/g, "");
+    return str.replace(/\s+$/g, "");
 };
 
 /**
@@ -55,11 +55,11 @@ export const trimR = (str) => {
  * @returns
  */
 export const search = (str, kwd, caseSensitive = true) => {
-  if (!caseSensitive) {
-    kwd = kwd.toLowerCase();
-    str = str.toLowerCase();
-  }
-  return str.indexOf(kwd);
+    if (!caseSensitive) {
+        kwd = kwd.toLowerCase();
+        str = str.toLowerCase();
+    }
+    return str.indexOf(kwd);
 };
 
 /**
@@ -68,10 +68,9 @@ export const search = (str, kwd, caseSensitive = true) => {
  * @returns
  */
 export const getExtension = (str) => {
-  str = str.split(".");
-  return str.pop();
+    str = str.split(".");
+    return str.pop();
 };
-
 
 /**
  * 全部替换
@@ -81,8 +80,8 @@ export const getExtension = (str) => {
  * @returns 
  */
 export const replaceAll = (str, replaceKey, replaceVal) => {
-  var reg = new RegExp(replaceKey, 'g');
-  return str.replace(reg, replaceVal || '');
+    var reg = new RegExp(replaceKey, 'g');
+    return str.replace(reg, replaceVal || '');
 }
 
 /**
@@ -92,12 +91,12 @@ export const replaceAll = (str, replaceKey, replaceVal) => {
  * @returns 
  */
 export const averageArrGroup = (array, subGroupLength) => {
-  let index = 0;
-  let newArray = [];
-  while (index < array.length) {
-    newArray.push(array.slice(index, index += subGroupLength));
-  }
-  return newArray;
+    let index = 0;
+    let newArray = [];
+    while (index < array.length) {
+        newArray.push(array.slice(index, index += subGroupLength));
+    }
+    return newArray;
 }
 
 /**
@@ -107,24 +106,24 @@ export const averageArrGroup = (array, subGroupLength) => {
  * @returns 
  */
 export const toFixed = (number, m) => {
-  if (typeof number !== 'number') {
-    throw new Error("target is not a number");
-  }
-  let result = Math.round(Math.pow(10, m) * number) / Math.pow(10, m);
-  result = String(result);
-  if (result.indexOf(".") == -1) {
-    if (m != 0) {
-      result += ".";
-      result += new Array(m + 1).join('0');
+    if (typeof number !== 'number') {
+        throw new Error("target is not a number");
     }
-  } else {
-    let arr = result.split('.');
-    if (arr[1].length < m) {
-      arr[1] += new Array(m - arr[1].length + 1).join('0')
+    let result = Math.round(Math.pow(10, m) * number) / Math.pow(10, m);
+    result = String(result);
+    if (result.indexOf(".") == -1) {
+        if (m != 0) {
+            result += ".";
+            result += new Array(m + 1).join('0');
+        }
+    } else {
+        let arr = result.split('.');
+        if (arr[1].length < m) {
+            arr[1] += new Array(m - arr[1].length + 1).join('0')
+        }
+        result = arr.join('.')
     }
-    result = arr.join('.')
-  }
-  return result
+    return result
 }
 
 /**
@@ -133,12 +132,12 @@ export const toFixed = (number, m) => {
  * @returns 
  */
 export const isJsonString = (str) => {
-  try {
-    if (typeof (JSON.parse(str)) === 'object') {
-      return true
+    try {
+        if (typeof (JSON.parse(str)) === 'object') {
+            return true
+        }
+    } catch (e) {
+        return false
     }
-  } catch (e) {
     return false
-  }
-  return false
 }
